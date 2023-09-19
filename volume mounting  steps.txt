@@ -1,0 +1,54 @@
+ docker run -itd --name unc1 ubuntu:latest
+ npx create-next-app@latest <projectname>
+ cd nextv/
+ code .
+ edit       #[(ranu Get started by editing app/page.tsx)]
+ ----------docker file---------------
+ From node:18
+
+ WORKDIR /home/next1
+
+ copy . .
+
+ RUN npm install 
+
+ RUN npm run build 
+
+ EXPOSE 3000
+ ----------docker file---------------
+ docker image build -t nextvm:t1 .
+ docker run -itd -p 3000:3000-v .:/home/next1  --name uc1  nextvm:t1
+ make a file ---> ranu.txt 
+ inside file ranu.txt -----> hello
+ ls 
+ Get-ChildItem -Force
+ docker volume ls
+ docker container exec -it uc1 /bin/bash
+ npm run dev
+ note :- go to next.config.js file 
+        const nextconfig = 
+ -------------------paste----------------
+{
+  reactStrictMode: true,
+  swcMinify: true,
+  webpack: (config, context) => {
+    // Enable polling based on env variable being set
+    if(process.env.NEXT_WEBPACK_USEPOLLING) {
+      config.watchOptions = {
+        poll: 500,
+        aggregateTimeout: 300
+      }
+    }
+    return config
+  },
+}
+-------------------paste end-------------
+------------------make file --------------------
+ .env.local
+ paste ------> NEXT_WEBPACK_USEPOLLING=1
+----------------------end----------------------
+------------------make file---------------------
+ .env
+ paste ------> NEXT_WEBPACK_USEPOLLING=1  
+----------------------end---------------------- 
+docker container stop & start 
